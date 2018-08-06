@@ -1,13 +1,13 @@
 import getTokenTypeByToken from './getTokenTypeByToken';
 import flattenInlineTokens from './flattenInlineTokens';
 
-export function cleanupTokens(tokens) {
+export function cleanupTokens(tokens, parseLinksAsBlock) {
   tokens = flattenInlineTokens(tokens);
   tokens.forEach(token => {
     token.type = getTokenTypeByToken(token);
 
     // set image and hardbreak to block elements
-    if (token.type === 'image' || token.type === 'hardbreak') {
+    if (token.type === 'image' || token.type === 'hardbreak' || (parseLinksAsBlock && token.type === 'link')) {
       token.block = true;
     }
   });

@@ -12,9 +12,9 @@ import groupTextTokens from './util/groupTextTokens';
  * @param {AstRenderer} [markdownIt]
  * @return {View}
  */
-export default function parser(source, renderer, markdownIt) {
+export default function parser(source, renderer, markdownIt, parseLinksAsBlock) {
   let tokens = stringToTokens(source, markdownIt);
-  tokens = cleanupTokens(tokens);
+  tokens = cleanupTokens(tokens, parseLinksAsBlock);
   tokens = groupTextTokens(tokens);
 
   const astTree = tokensToAST(tokens);

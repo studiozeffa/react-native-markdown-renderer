@@ -73,6 +73,7 @@ export default class Markdown extends Component {
     markdownit: PropTypes.instanceOf(MarkdownIt),
     plugins: PropTypes.arrayOf(PropTypes.instanceOf(PluginContainer)),
     style: PropTypes.any,
+    parseLinksAsBlock: PropTypes.bool
   };
 
   /**
@@ -83,6 +84,7 @@ export default class Markdown extends Component {
     rules: null,
     plugins: [],
     style: null,
+    parseLinksAsBlock: false,
     markdownit: MarkdownIt({
       typographer: true,
     }),
@@ -210,6 +212,6 @@ export default class Markdown extends Component {
    */
   render() {
     const copy = (this.copy = this.getCopyFromChildren());
-    return parser(copy, this.renderer.render, this.markdownParser);
+    return parser(copy, this.renderer.render, this.markdownParser, this.props.parseLinksAsBlock);
   }
 }
